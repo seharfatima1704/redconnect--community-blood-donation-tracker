@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row g-4 mb-4">
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body">
+        <div class="fs-1 fw-bold text-danger">{{ total_donors }}</div>
+        <div class="text-muted">Total Donors</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body">
+        <div class="fs-1 fw-bold text-danger">{{ eligible_donors }}</div>
+        <div class="text-muted">Eligible Donors (≥ 90 days)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body">
+        <div class="fs-1 fw-bold text-danger">{{ total_requests }}</div>
+        <div class="text-muted">Total Requests</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4">
+  <div class="card-body">
+    <h5 class="mb-3">Blood Group Availability</h5>
+
+    {% for bg, data in availability.items() %}
+      <div class="mb-3">
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="badge bg-danger me-2">{{ bg }}</span>
+            Eligible: {{ data.eligible }} / Total: {{ data.total }}
+          </div>
+        </div>
+        <div class="progress rounded-pill" style="height: 10px;">
+          <div
+            class="progress-bar bg-danger"
+            role="progressbar"
+            style="width: {{ (data.eligible * 100 // data.total) if data.total > 0 else 0 }}%"
+            aria-valuenow="{{ (data.eligible * 100 // data.total) if data.total > 0 else 0 }}"
+            aria-valuemin="0"
+            aria-valuemax="100">
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    
+  </div>
+</div>
+
+{% endblock %}

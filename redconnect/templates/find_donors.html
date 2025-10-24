@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Find Donors</h2>
+<form method="get" class="card p-3 mb-4 bg-white shadow-sm rounded-4">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-3">
+      <label class="form-label">Blood Group</label>
+      <select name="blood_group" class="form-select rounded-pill">
+        <option value="">Any</option>
+        {% for bg in blood_groups %}
+        <option value="{{ bg }}" {% if selected_bg==bg %}selected{% endif %}>{{ bg }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">City</label>
+      <input name="city" class="form-control rounded-pill" value="{{ selected_city }}" placeholder="e.g., Lahore">
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-danger rounded-pill px-4">Search</button>
+    </div>
+  </div>
+</form>
+
+<div class="row g-3">
+  {% if donors %}
+    {% for d in donors %}
+    <div class="col-md-4">
+      <div class="card donor-card border-0 shadow-sm rounded-4 h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">{{ d.full_name }}</h5>
+            <span class="badge bg-danger">{{ d.blood_group }}</span>
+          </div>
+          <div class="text-muted">{{ d.city }}{% if d.state %}, {{ d.state }}{% endif %}</div>
+          <div class="small mt-2">
+            <div><strong>Phone:</strong> {{ d.phone }}</div>
+            <div><strong>Email:</strong> {{ d.email }}</div>
+            <div><strong>Last Donation:</strong> {{ d.last_donation_date if d.last_donation_date else 'N/A' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="col-12">
+      <div class="alert alert-light border text-center rounded-4">No eligible donors found for the given filters.</div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

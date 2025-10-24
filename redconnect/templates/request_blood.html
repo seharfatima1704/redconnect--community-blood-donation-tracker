@@ -1,0 +1,47 @@
+python {% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Request Blood</h2>
+<form method="post" class="card p-4 bg-white shadow-sm rounded-4">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Patient Name</label>
+      <input name="patient_name" class="form-control rounded-pill" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Contact Person</label>
+      <input name="contact_person" class="form-control rounded-pill" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input type="email" name="email" class="form-control rounded-pill">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Phone</label>
+      <input name="phone" class="form-control rounded-pill" required>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Blood Group Needed</label>
+      <select name="blood_group_needed" class="form-select rounded-pill" required>
+        {% for bg in blood_groups %}
+        <option value="{{ bg }}">{{ bg }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Units Required</label>
+      <input type="number" min="1" name="units_required" class="form-control rounded-pill" value="1" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Hospital Name</label>
+      <input name="hospital_name" class="form-control rounded-pill" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">City</label>
+      <input name="city" class="form-control rounded-pill" required>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button class="btn btn-danger rounded-pill px-4">Submit Request</button>
+  </div>
+</form>
+{% endblock %}

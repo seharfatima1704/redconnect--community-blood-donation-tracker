@@ -1,0 +1,12 @@
+:root{ --rc-red:#B71C1C; --rc-red-2:#E53935; }
+.hero{ background: linear-gradient(180deg, #fff, #fff5f5); }
+.btn-danger{ background-color: var(--rc-red); border-color: var(--rc-red); }
+.btn-danger:hover{ background-color: var(--rc-red-2); border-color: var(--rc-red-2); transform: translateY(-1px); transition: all .2s ease; }
+.form-control, .form-select{ box-shadow: none!important; padding: .6rem .9rem; }
+.rounded-pill{ border-radius: 50rem!important; }
+.stat-card{ transition: transform .2s ease; }
+.stat-card:hover{ transform: translateY(-3px); }
+.donor-card{ transition: box-shadow .2s ease, transform .2s ease; }
+.donor-card:hover{ transform: translateY(-3px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.1)!important; }
+.fade-in{ animation: fade .3s ease-in-out; }
+@keyframes fade{ from{opacity:0; transform: translateY(4px);} to{opacity:1; transform:none;} }
